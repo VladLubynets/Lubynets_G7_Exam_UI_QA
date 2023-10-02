@@ -9,7 +9,7 @@ public class SearchMenu extends ParentPage {
     private WebElement InputSearch;
     @FindBy(xpath = "//i[@class='fa fa-search']")
     private WebElement buttonSearchByUI;
-    @FindBy(xpath = "//a[@qid='search-results-title' and@href='/threads/bmwe34-net-website.294509/post-3355485']")
+    @FindBy(xpath = "//a[contains(@qid, 'search-results-title') and contains(@href, '/threads/bmw-new-site-for-efficient-dynamics.')]")
     private WebElement SearchResult;
     @FindBy(xpath = "//button[@type='button' and @class='filterBar-menuTrigger button menuTrigger button' and @id='advanced-search_filter-button']")
     private WebElement buttonFilter;
@@ -34,15 +34,16 @@ public class SearchMenu extends ParentPage {
     }
 
     public void checkSearchResultIsDisplayed() {
-        isElementDisplayed(SearchResult);
+        checkElementDisplayed(SearchResult);
     }
 
     public void checkIsFilterDisplayed() {
-        isElementDisplayed(buttonFilter);
+        checkElementDisplayed(buttonFilter);
 
     }
+
     public void checkIsSortDisplayed() {
-        isElementDisplayed(buttonSort);
+        checkElementDisplayed(buttonSort);
 
     }
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.NoSuchElementException;
 
 public class RegisterPage extends ParentPage {
     @FindBy(xpath = "//a[@class='button--alt button']")
@@ -54,11 +55,19 @@ public class RegisterPage extends ParentPage {
         setCheckboxState(RegisterCheckBox, state);
     }
 
-    public boolean isElementDisplayedByText(String text) {
+    public void CheckIsElementDisplayedByText(String text) {
         String xpath = String.format("//*[contains(text(), '%s')]", text);
-        WebElement element = webDriver.findElement(By.xpath(xpath));
-        return isElementDisplayed(element);
+
+        try {
+            WebElement element = webDriver.findElement(By.xpath(xpath));
+            if (!isElementDisplayed(element)) {
+                throw new AssertionError("Element with text '" + text + "' is not displayed.");
+            }
+        } catch (NoSuchElementException e) {
+            throw new AssertionError("Element with text '" + text + "' was not found.");
+        }
     }
+
 
 }
 

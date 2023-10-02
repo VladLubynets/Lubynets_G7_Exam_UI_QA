@@ -8,7 +8,7 @@ import org.junit.Test;
 public class ActionMenuTest extends BaseTest {
 
     @Before
-    public void validLogin() {
+    public void ValidLogin() {
         pageProvider.loginPage().openPage();
         pageProvider.loginPage().clickOnButtonAgreeCookiesIfExists();
         pageProvider.loginPage().clickOnButtonLoginMainPage();
@@ -20,27 +20,28 @@ public class ActionMenuTest extends BaseTest {
     }
 
     @Test
-    public void checkActionMenu(){
+    public void CheckActionMenu() {
         pageProvider.actionMenu().clickOnButtonWhatsNew();
-        pageProvider.actionMenu().WhatsNewElementsIsDisplayed();
+        pageProvider.actionMenu().checkWhatsNewElementsIsDisplayed();
         pageProvider.actionMenu().clickOnButtonForumListing();
-        pageProvider.actionMenu().ForumListingElementsIsDisplayed();
+        pageProvider.actionMenu().checkForumListingElementsIsDisplayed();
         pageProvider.actionMenu().clickOnButtonMarketplace();
-        pageProvider.actionMenu().MarketplaceElementsIsDisplayed();
+        pageProvider.actionMenu().checkMarketplaceElementsIsDisplayed();
         pageProvider.actionMenu().clickOnButtonShowcase();
-        pageProvider.actionMenu().ShowcaseElementsIsDisplayed();
+        pageProvider.actionMenu().checkShowcaseElementsIsDisplayed();
         pageProvider.actionMenu().clickOnButtonGallery();
-        pageProvider.actionMenu().GalleryElementsIsDisplayed();
+        pageProvider.actionMenu().checkGalleryElementsIsDisplayed();
         pageProvider.actionMenu().clickOnButtonAdvancedSearch();
-        pageProvider.actionMenu().AdvancedSearchElementsIsDisplayed();
+        pageProvider.actionMenu().checkAdvancedSearchElementsIsDisplayed();
         pageProvider.actionMenu().clickOnButtonMembers();
-        pageProvider.actionMenu().MembersElementsIsDisplayed();
+        pageProvider.actionMenu().checkMembersElementsIsDisplayed();
         pageProvider.actionMenu().clickOnButtonHelp();
-        pageProvider.actionMenu().FaqElementsIsDisplayed();
+        pageProvider.actionMenu().checkFaqElementsIsDisplayed();
 
     }
+
     @Test
-    public void DarkModeTest(){
+    public void DarkModeTest() {
         pageProvider.actionMenu().clickOnDarkThemeAndCheck();
 
     }

@@ -65,7 +65,7 @@ public class LoginPage extends ParentPage {
         clickOnElement(buttonLogIn);
     }
 
-    public void CheckIsAvatarDisplayed() {
+    public void checkIsAvatarDisplayed() {
         checkElementDisplayed(avatar);
     }
 

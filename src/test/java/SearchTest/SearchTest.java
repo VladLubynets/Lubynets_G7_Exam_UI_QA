@@ -18,7 +18,7 @@ public class SearchTest extends BaseTest {
     @Test
     public void searchTest() {
         pageProvider.searchMenu().clickOnInputSearch();
-        pageProvider.searchMenu().enterTextIntoInputSearch("bmw 5 series e34");
+        pageProvider.searchMenu().enterTextIntoInputSearch("bmw site");
         pageProvider.searchMenu().clickOnButtonSearchByUI();
         pageProvider.searchMenu().checkSearchResultIsDisplayed();
         pageProvider.searchMenu().checkIsFilterDisplayed();

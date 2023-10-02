@@ -16,6 +16,7 @@ public class ActionWithElements {
     protected WebDriver webDriver;
     Logger logger = Logger.getLogger(getClass());
     protected WebDriverWait webDriverWait10, webDriverWait15;
+
     public ActionWithElements(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
@@ -73,6 +74,7 @@ public class ActionWithElements {
 
     public void checkElementDisplayed(WebElement element) {
         Assert.assertTrue("Element is not displayed", isElementDisplayed(element));
+        webDriverWait10.until(ExpectedConditions.visibilityOf(element));
     }
 
     private void printErrorAndStopTest(Exception e) {

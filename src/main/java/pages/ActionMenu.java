@@ -35,7 +35,7 @@ public class ActionMenu extends ParentPage {
     private WebElement buttonLightTheme;
     @FindBy(xpath = "//span[@itemprop='name' and contains(text(),'Home')]")
     private WebElement buttonHome;
-    @FindBy(xpath = "//h1[@qid='page-header' and contains(text(),'What's New')]")
+    @FindBy(xpath = "//h1[@class='  ' and @qid='page-header' and contains(text(), \"What's New\")]")
     private WebElement buttonHeaderWhatsNew;
     @FindBy(xpath = "//a[@href='/whats-new/posts/' and @qid='new-post-button']")
     private WebElement buttonNewPosts;
@@ -167,75 +167,75 @@ public class ActionMenu extends ParentPage {
         clickOnElement(buttonBimmerfestLogo);
     }
 
-    public void WhatsNewElementsIsDisplayed() {
-        isElementDisplayed(buttonHeaderWhatsNew);
-        isElementDisplayed(buttonNewPosts);
-        isElementDisplayed(buttonPopular);
-        isElementDisplayed(buttonNewShowcaseItems);
-        isElementDisplayed(buttonNewGallery);
-        isElementDisplayed(buttonNewArticles);
-        isElementDisplayed(buttonNewLookingForReplies);
-        isElementDisplayed(buttonNewsFeed);
-        isElementDisplayed(buttonHome);
+    public void checkWhatsNewElementsIsDisplayed() {
+        checkElementDisplayed(buttonHeaderWhatsNew);
+        checkElementDisplayed(buttonNewPosts);
+        checkElementDisplayed(buttonPopular);
+        checkElementDisplayed(buttonNewShowcaseItems);
+        checkElementDisplayed(buttonNewGallery);
+        checkElementDisplayed(buttonNewArticles);
+        checkElementDisplayed(buttonNewLookingForReplies);
+        checkElementDisplayed(buttonNewsFeed);
+        checkElementDisplayed(buttonHome);
 
     }
 
-    public void ForumListingElementsIsDisplayed() {
-        isElementDisplayed(buttonHeaderForumListing);
-        isElementDisplayed(branchNewMemberIntroductions);
-        isElementDisplayed(branchGeneralBMWQuestions);
+    public void checkForumListingElementsIsDisplayed() {
+        checkElementDisplayed(buttonHeaderForumListing);
+        checkElementDisplayed(branchNewMemberIntroductions);
+        checkElementDisplayed(branchGeneralBMWQuestions);
 
 
     }
 
-    public void MarketplaceElementsIsDisplayed() {
-        isElementDisplayed(buttonHeaderMarketplace);
-        isElementDisplayed(buttonFilter);
-        isElementDisplayed(buttonSort);
-        isElementDisplayed(buttonHome);
+    public void checkMarketplaceElementsIsDisplayed() {
+        checkElementDisplayed(buttonHeaderMarketplace);
+        checkElementDisplayed(buttonFilter);
+        checkElementDisplayed(buttonSort);
+        checkElementDisplayed(buttonHome);
 
     }
 
-    public void ShowcaseElementsIsDisplayed() {
-        isElementDisplayed(buttonHeaderShowcase);
-        isElementDisplayed(buttonFilterCategories);
-        isElementDisplayed(buttonFilterShowcase);
-        isElementDisplayed(buttonHome);
+    public void checkShowcaseElementsIsDisplayed() {
+        checkElementDisplayed(buttonHeaderShowcase);
+        checkElementDisplayed(buttonFilterCategories);
+        checkElementDisplayed(buttonFilterShowcase);
+        checkElementDisplayed(buttonHome);
 
     }
 
-    public void GalleryElementsIsDisplayed() {
-        isElementDisplayed(buttonHeaderGallery);
-        isElementDisplayed(buttonHeaderMedia);
-        isElementDisplayed(branchBMWPhotos);
-        isElementDisplayed(branchBrowseAlbums);
-        isElementDisplayed(buttonHome);
+    public void checkGalleryElementsIsDisplayed() {
+        checkElementDisplayed(buttonHeaderGallery);
+        checkElementDisplayed(buttonHeaderMedia);
+        checkElementDisplayed(branchBMWPhotos);
+        checkElementDisplayed(branchBrowseAlbums);
+        checkElementDisplayed(buttonHome);
 
     }
 
-    public void AdvancedSearchElementsIsDisplayed() {
-        isElementDisplayed(buttonHeaderAdvancedSearch);
-        isElementDisplayed(buttonSearchDiscussions);
-        isElementDisplayed(buttonSearchShowcase);
-        isElementDisplayed(buttonSearchAlbums);
+    public void checkAdvancedSearchElementsIsDisplayed() {
+        checkElementDisplayed(buttonHeaderAdvancedSearch);
+        checkElementDisplayed(buttonSearchDiscussions);
+        checkElementDisplayed(buttonSearchShowcase);
+        checkElementDisplayed(buttonSearchAlbums);
         ;
 
 
     }
 
-    public void MembersElementsIsDisplayed() {
-        isElementDisplayed(buttonHeaderMembers);
-        isElementDisplayed(listOfMembers);
-        isElementDisplayed(buttonOverview);
+    public void checkMembersElementsIsDisplayed() {
+        checkElementDisplayed(buttonHeaderMembers);
+        checkElementDisplayed(listOfMembers);
+        checkElementDisplayed(buttonOverview);
 
 
     }
 
-    public void FaqElementsIsDisplayed() {
-        isElementDisplayed(buttonHeaderFAQ);
-        isElementDisplayed(listOfFAQ);
-        isElementDisplayed(buttonFAQ);
-        isElementDisplayed(buttonHome);
+    public void checkFaqElementsIsDisplayed() {
+        checkElementDisplayed(buttonHeaderFAQ);
+        checkElementDisplayed(listOfFAQ);
+        checkElementDisplayed(buttonFAQ);
+        checkElementDisplayed(buttonHome);
 
     }
 
@@ -248,20 +248,21 @@ public class ActionMenu extends ParentPage {
         waitForBackgroundColorChange("rgb(0, 0, 0)", 10);
     }
 
-    public boolean waitForBackgroundColorChange(String expectedColor, int timeoutInSeconds) {
+    public void waitForBackgroundColorChange(String expectedColor, int timeoutInSeconds) {
         ExpectedCondition<Boolean> colorChangeCondition = webDriver -> {
             JavascriptExecutor jsExecutor = (JavascriptExecutor) webDriver;
             String currentColor = (String) jsExecutor.executeScript("return window.getComputedStyle(document.body).backgroundColor");
             return !currentColor.equals(expectedColor);
         };
 
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(timeoutInSeconds));
         try {
-            return wait.until(colorChangeCondition);
+            if (!wait.until(colorChangeCondition)) {
+                throw new AssertionError("Background color did not change as expected.");
+            }
         } catch (TimeoutException e) {
-            return false;
+            throw new AssertionError("Timed out waiting for background color to change.");
         }
     }
+
 }
-
-
